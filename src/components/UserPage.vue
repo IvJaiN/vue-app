@@ -1,4 +1,9 @@
 <template>
+    <slider
+        :photos="photos"
+        v-if="sliderOn"
+        @exit="sliderOn = false"
+    />
     <button
         class="user-page__btn"
         @click="$router.push('/')"
@@ -7,7 +12,7 @@
     <header class="user-page__header">User #{{ user.id }}</header>
 
     <section class="user-page__data-wrapper" v-if="user">
-        <div class="user-page__photo">
+        <div class="user-page__photo" @click="sliderOn = true">
             <img :src="photos[0].url" alt="my photo" v-if="photos[0]">
             <spinner v-else/>
         </div>
@@ -67,16 +72,18 @@
 
 <script>
 import Spinner from "./Spinner";
+import Slider from "./Slider";
 export default {
     name: "UserPage",
-    components: {Spinner},
+    components: {Slider, Spinner},
     data() {
         return {
             user: {},
             posts: [],
             photos: [],
             currentId: this.$route.params.id,
-            visiblePosts: false
+            visiblePosts: false,
+            sliderOn: true
         }
     },
     methods: {
@@ -120,6 +127,7 @@ export default {
     width: 400px;
     height: 400px;
     margin-right: 50px;
+    cursor: pointer;
 }
 .user-page__photo img {
     width: 400px;
