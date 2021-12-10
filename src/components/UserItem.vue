@@ -1,8 +1,8 @@
 <template>
     <li class="user-item">
-        <div class="user-item__title">User #{{ user.id }} (Nickname: {{user.username}})</div>
+        <div class="user-item__title">User #{{ user.id }} (Nickname: {{ user.username }})</div>
         <div class="user-item__body">
-<!--            go to page user-->
+            <!--            go to page user-->
             <div class="user-item__content" @click="$router.push(`/users/${user.id}`)">
                 <div class="user-item__photo">
                     <img class="user-item__photo-image" :src="photo[0].url" v-if="photo[0]"/>
@@ -57,8 +57,14 @@
                 </li>
             </ul>
         </div>
-<!--        show and hide block posts-->
-        <button v-show="!user.isVisitMore" class="user-item__btn" @click="$emit('onClickMore', user.id, 'isVisitMore')">More...</button>
+        <!--        show and hide block posts-->
+        <button
+            v-show="!user.isVisitMore"
+            class="user-item__btn"
+            @click="$emit('onClickMore', user.id, 'isVisitMore')"
+        >
+            More...
+        </button>
         <div v-if="user.isVisitMore" class="user-item__footer">
             <div class="user-item__footer-content">
                 <div class="user-item__footer-contacts">
@@ -77,17 +83,25 @@
                 <div class="user-item__footer-company">
                     <h6 class="user-item__footer-title">Company:</h6>
                     <p class="user-item__footer-name"><span>Name: </span>{{ user.company.name }}</p>
-                    <p class="user-item__footer-catchPhrase"><span>Catch phrase: </span>{{ user.company.catchPhrase }}</p>
+                    <p class="user-item__footer-catchPhrase"><span>Catch phrase: </span>{{ user.company.catchPhrase }}
+                    </p>
                     <p class="user-item__footer-bs"><span>Bs: </span>{{ user.company.bs }}</p>
                 </div>
             </div>
-            <button class="user-item__btn" @click="$emit('onClickHide', user.id, 'isVisitMore')">Hide</button>
+            <button
+                class="user-item__btn"
+                @click="$emit('onClickHide',
+                user.id,
+                'isVisitMore')"
+            >
+                Hide</button>
         </div>
     </li>
 </template>
 
 <script>
 import Spinner from "./Spinner";
+
 export default {
     name: "UserItem",
     components: {Spinner},

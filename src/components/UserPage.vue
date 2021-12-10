@@ -7,7 +7,8 @@
     <button
         class="user-page__btn"
         @click="$router.push('/')"
-    >Return</button>
+    >Return
+    </button>
 
     <header class="user-page__header">User #{{ user.id }}</header>
 
@@ -34,7 +35,8 @@
                 <div class="user-page__company">
                     <h6 class="user-item__footer-title">Company:</h6>
                     <p class="user-item__footer-name"><span>Name: </span>{{ user.company.name }}</p>
-                    <p class="user-item__footer-catchPhrase"><span>Catch phrase: </span>{{ user.company.catchPhrase }}</p>
+                    <p class="user-item__footer-catchPhrase"><span>Catch phrase: </span>{{ user.company.catchPhrase }}
+                    </p>
                     <p class="user-item__footer-bs"><span>Bs: </span>{{ user.company.bs }}</p>
                 </div>
             </div>
@@ -49,7 +51,8 @@
         @click="fetchData(`https://jsonplaceholder.typicode.com/posts?userId=${this.currentId}`, 'userId')
             .then(data => this.posts = data)
             .then(() => this.visiblePosts = true)"
-    >Get posts</button>
+    >Get posts
+    </button>
 
     <section class="user-page__posts" v-if='visiblePosts'>
         <ul class="user-page__posts-list" v-if="posts[0]">
@@ -58,13 +61,14 @@
                 v-for="(post, idx) in posts"
                 :key="idx"
             >
-                <h4 class="user-page__posts-title">{{post.id}}. {{post.title}}</h4>
-                <p class="user-page__posts-body">{{post.body}}</p>
+                <h4 class="user-page__posts-title">{{ post.id }}. {{ post.title }}</h4>
+                <p class="user-page__posts-body">{{ post.body }}</p>
             </li>
             <button
                 class="user-page__btn"
                 @click="visiblePosts = false"
-            >Hide posts</button>
+            >Hide posts
+            </button>
         </ul>
         <spinner v-else/>
     </section>
@@ -73,6 +77,7 @@
 <script>
 import Spinner from "./Spinner";
 import Slider from "./Slider";
+
 export default {
     name: "UserPage",
     components: {Slider, Spinner},
@@ -83,7 +88,7 @@ export default {
             photos: [],
             currentId: this.$route.params.id,
             visiblePosts: false,
-            sliderOn: true
+            sliderOn: false
         }
     },
     methods: {
@@ -114,56 +119,68 @@ export default {
     font-weight: 700;
     padding: 20px 0;
 }
+
 .user-page__btn {
     background: transparent;
     border: 1px solid #560088;
     padding: 10px 5px;
     color: #560088;
 }
+
 .user-page__data-wrapper {
     display: flex;
 }
+
 .user-page__photo {
     width: 400px;
     height: 400px;
     margin-right: 50px;
     cursor: pointer;
 }
+
 .user-page__photo img {
     width: 400px;
     height: 400px;
     object-fit: contain;
     object-position: center;
 }
+
 .user-page__data {
     padding-top: 30px;
 
 }
+
 .user-page__name {
     font-weight: 700;
     font-size: 35px;
 }
+
 .user-page__contacts {
     margin-top: 20px;
     width: 300px;
 }
+
 .user-page__contacts li {
     display: flex;
     justify-content: space-between;
 }
+
 .user-page__posts {
     margin-top: 40px;
 }
+
 .user-page__posts-item {
     padding: 20px;
     border: 2px solid #560088;
     margin: 5px 0;
 }
+
 .user-page__places {
     margin-top: 40px;
     display: flex;
     justify-content: space-around;
 }
+
 .user-page__address {
     margin-right: 40px;
 }

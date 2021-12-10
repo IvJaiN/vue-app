@@ -1,4 +1,11 @@
 <template>
+    <h1 class="app-title">Users list</h1>
+    <button @click="registrationView=true">Create new user</button>
+    <registration
+        v-if="registrationView"
+        @closeModal="registrationView=false"
+        @createUser="createNewUser"
+    />
     <ul class="users__list">
         <user-item
             v-if="users[0]"
@@ -19,13 +26,15 @@
 import UserItem from "./UserItem";
 import Spinner from "./Spinner";
 import UserPage from "./UserPage";
+import Registration from "./Registration";
 
 export default {
     name: 'Main',
-    components: {UserPage, Spinner, UserItem},
+    components: {Registration, UserPage, Spinner, UserItem},
     data() {
         return {
-            users: []
+            users: [],
+            registrationView: false
         }
     },
     methods: {
@@ -44,7 +53,7 @@ export default {
                 if (response.status === 200) {
                     return await response.json()
                 } else {
-                    alert('Reload please')
+                    alert('User not found!')
                 }
             } catch (e) {
                 console.error(e)
@@ -62,6 +71,11 @@ export default {
                 isChecked: false,
                 isVisitMore: false
             }
+        },
+
+        createNewUser(user) {
+            this.users = [this.changeDataUser(user), ... this.users]
+            this.registrationView = false
         }
     },
 
@@ -82,6 +96,10 @@ export default {
 #app {
     padding: 20px;
 }
-
-
+.app-title {
+    text-align: center;
+    padding: 30px 0;
+}
+.users__list {
+}
 </style>
